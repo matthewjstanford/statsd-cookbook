@@ -1,0 +1,11 @@
+AllCops:
+  Exclude:
+    - vendor/**
+    - metadata.rb
+    - Guardfile
+    - test/**
+    - .kitchen/**
+    - Rakefile
+
+LineLength:
+  Enabled: false

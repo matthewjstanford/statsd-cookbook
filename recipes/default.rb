@@ -11,6 +11,8 @@ when 'rhel'
   include_recipe 'statsd::_rhel'
 end
 
+include_recipe 'statsd::_graphite_search' if node['statsd']['graphite']['use_search']
+
 directory node['statsd']['conf_dir']
 
 template "#{node['statsd']['conf_dir']}/config.js" do
@@ -24,15 +26,12 @@ user node['statsd']['user'] do
   shell '/bin/false'
 end
 
-# TODO: write lib to find nodejs
-
 runit_service 'statsd' do
   action [:enable, :start]
   default_logger true
-  options ({
+  options(
     user: node['statsd']['user'],
     statsd_dir: node['statsd']['dir'],
-    conf_dir: node['statsd']['conf_dir'],
-    nodejs_bin: node['statsd']['nodejs_bin']
-  })
+    conf_dir: node['statsd']['conf_dir']
+  )
 end
