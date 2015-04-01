@@ -3,7 +3,8 @@ default['statsd']['package_version'] = '0.6.0'
 default['statsd']['sha'] = 'd16d744e6424dfd519dc71795a212ad1c08c3114'
 default['statsd']['user'] = 'statsd'
 default['statsd']['repo'] = 'https://github.com/etsy/statsd.git'
-default['statsd']['tmp_dir'] = '/tmp'
+default['statsd']['tmp_dir'] = Chef::Config[:file_cache_path]
+default['statsd']['build_dir'] = "#{node['statsd']['tmp_dir']}/build/usr/share/statsd/"
 
 default['statsd']['dir'] = '/usr/share/statsd'
 default['statsd']['conf_dir'] = '/etc/statsd'

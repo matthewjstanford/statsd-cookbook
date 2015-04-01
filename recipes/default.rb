@@ -4,6 +4,18 @@ include_recipe 'build-essential'
 include_recipe 'nodejs'
 include_recipe 'runit'
 
+chef_gem 'fpm'
+
+directory node['statsd']['build_dir'] do
+  recursive true
+end
+
+git node['statsd']['build_dir'] do
+  repository node['statsd']['repo']
+  reference node['statsd']['sha']
+  action :sync
+end
+
 case node['platform_family']
 when 'debian'
   include_recipe 'statsd::_debian'

@@ -1,24 +1,13 @@
-chef_gem 'fpm'
-
-dir = "#{node['statsd']['tmp_dir']}/build/usr/share/statsd/"
-
-directory dir do
-  recursive true
+package 'debhelper' do
+  action :install
 end
-
-git dir do
-  repository node['statsd']['repo']
-  reference node['statsd']['sha']
-  action :sync
-  notifies :run, 'execute[build debian package]'
-end
-
-package 'debhelper'
 
 execute 'build debian package' do
   command "fpm -s dir -t deb -n statsd -a noarch -v #{node['statsd']['package_version']} ."
   cwd "#{node['statsd']['tmp_dir']}/build"
   creates "#{node['statsd']['tmp_dir']}/build/statsd_#{node['statsd']['package_version']}_all.deb"
+  action :nothing
+  subscribes :run, "git[#{node['statsd']['build_dir']}]", :immediately
 end
 
 package 'statsd' do
