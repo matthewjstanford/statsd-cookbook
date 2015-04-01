@@ -1,0 +1,1 @@
+<%= node['statsd']['config'].select {|k,v| v.nil? == false }.to_json %>
