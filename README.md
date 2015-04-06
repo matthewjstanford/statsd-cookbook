@@ -2,6 +2,9 @@
 [![Open issues](https://img.shields.io/github/issues/matthewjstanford/statsd-cookbook.svg)][issues]
 [![Build Status](https://img.shields.io/travis/matthewjstanford/statsd-cookbook.svg)][travis]
 
+[issues]: https://github.com/matthewjstanford/statsd-cookbook/issues
+[travis]: https://travis-ci.org/matthewjstanford/statsd-cookbook
+
 ## Supported Platforms
 
 * Centos 6.5
