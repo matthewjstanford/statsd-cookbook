@@ -6,11 +6,13 @@ include_recipe 'runit'
 
 chef_gem 'fpm'
 
-directory node['statsd']['build_dir'] do
+build_dir = "#{node['statsd']['tmp_dir']}#{node['statsd']['dir']}"
+
+directory build_dir do
   recursive true
 end
 
-git node['statsd']['build_dir'] do
+git build_dir do
   repository node['statsd']['repo']
   reference node['statsd']['sha']
   action :sync
